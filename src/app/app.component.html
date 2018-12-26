@@ -1,10 +1,8 @@
 
 <div class="container">
-  <app-cars-form
-  (addCar)="onAdd($event)"
-  ></app-cars-form>
-  
+  <app-cars-form></app-cars-form>
+
   <div class="list-group mt-4">
-    <app-cars (delete)="onDelete($event)" *ngFor="let car of cars" [car]='car'></app-cars>
+    <app-cars *ngFor="let car of (carState | async).cars" [car]='car'></app-cars>
   </div>
 </div>

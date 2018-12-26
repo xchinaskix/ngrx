@@ -1,26 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Car } from '../car.model';
+import { CarsService } from '../cars.service';
 
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
   styleUrls: ['./cars.component.css']
 })
-export class CarsComponent implements OnInit {
+export class CarsComponent {
   @Input() car: Car;
-  @Output() delete = new EventEmitter<Car>();
 
-  constructor() { }
+  constructor(private service: CarsService) { }
 
-  ngOnInit() {
-  }
 
   deleteCar() {
-    this.delete.emit(this.car);
+    this.service.deleteCar(this.car);
   }
 
   buyCar() {
     this.car.isSold = true;
+    this.service.updateCar(this.car);
   }
 
 }
